@@ -25,18 +25,20 @@ SECRET_KEY = '6x#b(uff18z#9ah2l*13rn=5@+deo1hv2aqq5s-0@70$wwr1k@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', "phren-dreams.com", "www.phren-dreams.com"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'properties.apps.PropertiesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +77,11 @@ WSGI_APPLICATION = 'DreamCatcher.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dreamcatcherdb',
+        'USER': 'postgres',
+        'PASSWORD': 'kh0rsAnd',
+        'HOST': 'localhost'
     }
 }
 
@@ -118,3 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+try:
+    from .local_settings import *
+except ImportError:
+    pass
